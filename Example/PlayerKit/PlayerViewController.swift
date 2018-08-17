@@ -17,6 +17,7 @@ class PlayerViewController: UIViewController, PlayerDelegate
         static let VideoURL = URL(string: "https://develop-file-jello.jkos.com/download/eb4eaec0a47425221489417c92e6d3130b0106000282e18700000000020100ca")!
     }
     
+    @IBOutlet weak var muteButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var label: UILabel!
@@ -51,6 +52,16 @@ class PlayerViewController: UIViewController, PlayerDelegate
         self.player.playing ? self.player.pause() : self.player.play()
     }
     
+    @IBAction func didTapMuteButton(_ sender: UIButton) {
+        if player.muted {
+            player.muted = false
+            muteButton.setTitle("Mute", for: .normal)
+        } else {
+            player.muted = true
+            muteButton.setTitle("Unmute", for: .normal)
+        }
+        
+    }
     @IBAction func didChangeSliderValue()
     {
         let value = Double(self.slider.value)
