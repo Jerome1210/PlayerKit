@@ -91,9 +91,22 @@ extension AVMediaSelectionOption: TextTrackMetadata
         return self.regularPlayerView.playerLayer
     }
     
+    private var originalVolume: Float? = nil
     // MARK: Player
     
     weak public var delegate: PlayerDelegate?
+
+    public var muted: Bool = false {
+        didSet {
+            if muted {
+                if originalVolume == nil { originalVolume = volume }
+                volume = 0
+            } else {
+                volume = (originalVolume != nil) ? originalVolume! : 50
+                originalVolume = nil
+            }
+        }
+    }
     
     public private(set) var state: PlayerState = .ready
     {

@@ -62,6 +62,8 @@ public enum PlayerError: Int
 {
     weak var delegate: PlayerDelegate? { get set }
     
+    var muted: Bool { get set }
+    
     var state: PlayerState { get }
     
     var duration: TimeInterval { get }
